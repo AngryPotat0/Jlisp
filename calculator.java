@@ -6,7 +6,7 @@ class userFunction implements Calculator{
 	private String[] params;
 	private Exp body;
 	private Env env;
-	public userFunction(String... params,Exp body,Env env){
+	public userFunction(String[] params,Exp body,Env env){
 		this.params = params;
 		this.body = body;
 		this.env = env;
@@ -15,7 +15,7 @@ class userFunction implements Calculator{
 	// 	return new Exp(params,args);
     // }
     
-    public Exp calculat(Exp... args){
+    public Exp calculat(Exp[] args){
         return Eval.eval(body,new Env(params,args));
     }
 }

@@ -11,8 +11,16 @@ public class JLisp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner cin = new Scanner(System.in);
-		String program = cin.nextLine();
-		Exp lispProgram = Parse.parse(program);
+		while(true){
+			System.out.print("JLisp>");
+			String program = cin.nextLine();
+			Exp lispProgram = Parse.parse(program);
+			Exp res = Eval.eval(lispProgram,globalEnv);
+			if(res != null){
+				test(res);
+			}
+		}
+//		test(res);
 		// test(lisp);
 //		System.out.println(output(eval(lispProgram,globalEnv)));
 		
@@ -20,24 +28,24 @@ public class JLisp {
 
 	private static void test(Exp lisp){
 		// System.out.println(lisp.type);
-		int limit = lisp.list.size();
-//		System.out.println("Test->" + limit);
-		for(int idx = 0;idx < limit;idx++){
-			Exp temp = lisp.list.get(idx);
-			if(temp.type.equals("List")){
-				System.out.println("List::");
-				test(temp);
-			}
-			else if(temp.type.equals("Str")){
-				System.out.println("Str::");
-				System.out.println(temp.symbol);
-			}
-			else if(temp.type.equals("Float")){
-				System.out.println("Float::");
-				System.out.println(temp.floatNumber);
+		if(lisp.type.equals("Lisp")){
+			int limit = lisp.list.size();
+			for(int idx = 0;idx < limit;idx++) {
+				Exp temp = lisp.list.get(idx);
+				if (temp.type.equals("List")) {
+					System.out.println("List::");
+					test(temp);
+				}
 			}
 		}
-		System.out.println("::List End");
+		else if(lisp.type.equals("Str")){
+				System.out.println("Str::");
+				System.out.println(lisp.symbol);
+		}
+		else if(lisp.type.equals("Float")){
+				System.out.println("Float::");
+				System.out.println(lisp.floatNumber);
+			}
+		}
+//		System.out.println("::List End");
 	}
-
-}
