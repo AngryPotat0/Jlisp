@@ -19,7 +19,14 @@ public class JLisp {
 	}
 
 	private static Exp eval(Exp lisp,Env env) {
-		return new Exp();
+		if(lisp.type.equals("Float"))
+			return lisp;
+		else if(lisp.type.equals("List")){
+			if(lisp.list.get(0).equals("define")){
+
+			}
+		}
+		
 	}
 
 	private static void test(Exp lisp){
@@ -59,22 +66,12 @@ class Env{
 	private int i;
 	public Env() {
 		i = 1;
-		map.put("+",add);
-	}
-}
-
-class userFunction{
-	private String[] params;
-	private Exp body;
-	private Env env;
-	public userFunction(String[] params,Exp body,Env env){
-		self.params = params;
-		self.body = body;
-		self.env = env;
-	}
-	public Exp call(Exp **args){
+		map.put("+",new add());
+		map.put("-",new sub());
+		map.put("*",new mul());
 
 	}
+//	private setMap(String key,)
 }
 
 class Parse{
