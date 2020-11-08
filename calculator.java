@@ -1,22 +1,26 @@
-public abstract class calculator{
-    abstract Exp calculat(Exp... args);
+public interface Calculator{
+    Exp calculat(Exp... args);
 }
 
-class userFunction{
+class userFunction implements Calculator{
 	private String[] params;
 	private Exp body;
 	private Env env;
-	public userFunction(String[] params,Exp body,Env env){
+	public userFunction(String... params,Exp body,Env env){
 		this.params = params;
 		this.body = body;
 		this.env = env;
 	}
-	public Exp call(Exp... args){
-		return new Exp();
-	}
+	// public Exp userEnv(Exp... args){
+	// 	return new Exp(params,args);
+    // }
+    
+    public Exp calculat(Exp... args){
+        return Eval.eval(body,new Env(params,args));
+    }
 }
 
-class add extends calculator{
+class add implements Calculator{
     public Exp calculat(Exp... args){
         Exp res = new Exp();
         res.type = "Float";
@@ -27,7 +31,7 @@ class add extends calculator{
     }
 }
 
-class sub extends calculator{
+class sub implements Calculator{
     public Exp calculat(Exp... args){
         Exp res = new Exp();
         res.type = "Float";
@@ -39,7 +43,7 @@ class sub extends calculator{
     }
 }
 
-class mul extends calculator{
+class mul implements Calculator{
     public Exp calculat(Exp... args){
         Exp res = new Exp();
         res.type = "Float";
