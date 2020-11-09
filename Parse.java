@@ -41,7 +41,8 @@ public class Parse{
 	private static Exp exp(String token){
 		Exp e = new Exp();
 		try{
-			float n = Float.parseFloat(token);
+//			float n = Float.parseFloat(token);
+			double n = Double.parseDouble(token);
 			e.type = "Float";
 			e.floatNumber = n;
 			return e;

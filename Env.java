@@ -10,10 +10,22 @@ public class Env{
 		map.put("+",new add());
 		map.put("-",new sub());
 		map.put("*",new mul());
+		map.put("max",new max());
+		map.put("min",new min());
+		map.put(">",new Bt());
+		map.put("<",new Lt());
+		map.put("sqrt",new sqrt());
 
 	}
-	public Env(String[] params,Exp[] args) {
-		this();
+	public Env(String[] params,Exp[] args,Env env) {
+		map = env.map;
+		for(String key : env.expMap.keySet())
+        {
+            if(expMap.get(key) == null)
+            {
+                expMap.put(key,env.expMap.get(key));
+            }
+        }
 		for(int i=0;i < params.length;i++){
 			expMap.put(params[i],args[i]);
 		}
